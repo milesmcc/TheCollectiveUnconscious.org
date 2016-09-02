@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="js/c00kie.js"></script>
+<script src="js/index.js"></script>
+<link href='https://fonts.googleapis.com/css?family=Assistant:400,200,700' rel='stylesheet' type='text/css'>
+<style>
+  #top-left{
+    align-items: flex-end;
+  }
+
+  body {
+    font-family: Assistant;
+    margin-bottom: 60px;
+  }
+
+  html {
+    position: relative;
+    min-height: 100%;
+  }
+
+  .footer {
+    position: absolute;
+    bottom: 0;
+    /* Set the fixed height of the footer here */
+    height: 80px;
+}
+
+  hr {
+    height: 1px;
+    background-color:#555;
+    color:#555;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  a {
+    color: #666;
+    font-weight: bold;
+  }
+
+  /* Mixin */
+  @mixin vertical-align($position: relative) {
+    position: $position;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+
+  #total-value{
+    font-size: 150px;
+  }
+
+  #personal-value{
+    font-size: 50px;
+  }
+  .smaller{
+    color: #777;
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  #why{
+    display: none;
+  }
+
+  #what-is-this{
+    text-align: right;
+  }
+</style>
+
+</head>
+<body>
+  <!-- More Info Modal -->
+<div class="modal fade" id="why" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">The Collective Unconscious</h4>
+            </div>
+            <div class="modal-body">
+                <div style="display: none;" id="welcome"><h1>It looks like this is your first time here. Welcome home.</h1> <h1><strong>Read what's below to catch yourself up.</strong></h1><hr></div>
+                The Collective Unconscious is an online installation with the sole goal of tracking and showing how much time is wasted.
+                <hr>
+                <h2>What is the collective unconscious?</h2>
+                The collective unconscious, in this setting, refers to the amount of time spent not-thinking-- not-contributing, not-improving. Time spent online, unconscious.
+                <hr>
+                <h2>What am I supposed to do?</h2>
+                Whenever you're not being productive (which, don't lie, is probably pretty often), just open up thecollectiveunconscious.org. The time you spend on the page will be added to the total tally, which is the big number you'll see on the middle of the page when you exit and close this window.
+                <hr>
+                <h2>You're misusing <a href="https://en.wikipedia.org/wiki/Collective_unconscious">Jung's term</a>!</h2>
+                We know. This installation is about a different type of collective unconscious.
+                <hr>
+                <h2>Will it lag me?</h2>
+                It's very unlikely that thecollectiveunconscious.org will cause any performance issues. Every five seconds it sends and receives a very small packet of information from the Collective Unconsciousnes servers. This packet is so small that it's almost impossible that you'd notice it.
+                <hr>
+                So go on, waste some more time.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+  <br>
+  <div id="top" class="row">
+    <div id="name" class="col-sm-10">
+      <strong>The Collective Unconscious</strong>
+    </div>
+    <span id="what-is-this" class="col-sm-2">
+      <a data-toggle="modal"
+                        data-target="#why">More Info</a>
+    </span>
+  </div>
+  <hr>
+  <div id="total-counter">
+    <center>
+      <span id="total-value">Collecting...</span>
+    </center>
+  </div>
+  <div id="personal-counter">
+    <center>
+      <span id="personal-value">Thinking...</span><br><small>your personal contribution</small>
+    </center>
+  </div>
+  <br><br><br>
+  <div class="row">
+    <center>
+      <div class="col-md-4">
+        <div>
+          <center>
+            <span class="smaller" id="sessions">Learning...</span><br><small>currently unconscious</small>
+          </center>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div>
+          <center>
+            <span class="smaller" id="thisSession">00:00</span><br><small>wasted this session</small>
+          </center>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div>
+          <center>
+            <span class="smaller" id="nextMilestone">Calculating...</span><br><small>next milestone</small>
+          </center>
+        </div>
+      </div>
+    </center>
+  </div>
+  <br><br><br>
+  <footer class="footer container">
+    <hr>
+    <div id="top" class="row">
+      <div id="md-c" class="col-sm-4">
+        The Collective Unconscious is an <a href="http://md-c.com">MD-C</a> project. Created by Miles McCain.
+      </div>
+      <div id="time" class="col-sm-4">
+        <center>All times (days):hours:minutes:seconds.</center>
+      </div>
+      <div id="cookies" class="col-sm-4" style="text-align: right;">
+        It uses cookies to track your contribution.
+      </div>
+    </div>
+    <br>
+  </footer>
+</div>
+</body>
+</html>
